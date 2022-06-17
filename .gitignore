@@ -1,0 +1,16 @@
+dcus
+ico
+dump
+modules
+Win32
+Botoesine
+__history/
+__recovery/
+*.local
+*.identcache
+*.res
+*.stat
+*.drc
+*.elf
+*.exe
+*.map

@@ -16,8 +16,8 @@ object frmPrincipal: TfrmPrincipal
   PixelsPerInch = 96
   TextHeight = 13
   object btnUpdate: TButton
-    Left = 206
-    Top = 72
+    Left = 198
+    Top = 24
     Width = 75
     Height = 25
     Caption = 'Update'
@@ -25,8 +25,8 @@ object frmPrincipal: TfrmPrincipal
     OnClick = btnUpdateClick
   end
   object btnDeleteById: TButton
-    Left = 287
-    Top = 72
+    Left = 279
+    Top = 24
     Width = 75
     Height = 25
     Caption = 'DeleteById'
@@ -34,8 +34,8 @@ object frmPrincipal: TfrmPrincipal
     OnClick = btnDeleteByIdClick
   end
   object btnInsert: TButton
-    Left = 125
-    Top = 72
+    Left = 117
+    Top = 24
     Width = 75
     Height = 25
     Caption = 'Insert'
@@ -43,8 +43,8 @@ object frmPrincipal: TfrmPrincipal
     OnClick = btnInsertClick
   end
   object btnDeleteAll: TButton
-    Left = 368
-    Top = 72
+    Left = 360
+    Top = 24
     Width = 75
     Height = 25
     Caption = 'DeleteAll'
@@ -52,8 +52,8 @@ object frmPrincipal: TfrmPrincipal
     OnClick = btnDeleteAllClick
   end
   object btnSelectAll: TButton
-    Left = 528
-    Top = 72
+    Left = 520
+    Top = 24
     Width = 75
     Height = 25
     Caption = 'SelectAll'
@@ -61,12 +61,30 @@ object frmPrincipal: TfrmPrincipal
     OnClick = btnSelectAllClick
   end
   object btnSelectById: TButton
-    Left = 447
-    Top = 72
+    Left = 439
+    Top = 24
     Width = 75
     Height = 25
     Caption = 'SelectById'
     TabOrder = 4
     OnClick = btnSelectByIdClick
+  end
+  object grdPedidos: TDBGrid
+    Left = 0
+    Top = 80
+    Width = 744
+    Height = 297
+    Align = alBottom
+    DataSource = dsPedidos
+    TabOrder = 6
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dsPedidos: TDataSource
+    Left = 616
+    Top = 104
   end
 end

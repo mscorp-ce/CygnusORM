@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ExceptionLog, Vcl.StdCtrls,
-  System.Generics.Collections,
+  System.Generics.Collections, Data.DB, Vcl.Grids, Vcl.DBGrids,
 
   uAbstraction, uController.PedidoController, uModel.Entities.Pedido;
 
@@ -17,6 +17,8 @@ type
     btnDeleteAll: TButton;
     btnSelectAll: TButton;
     btnSelectById: TButton;
+    dsPedidos: TDataSource;
+    grdPedidos: TDBGrid;
     procedure btnInsertClick(Sender: TObject);
     procedure btnUpdateClick(Sender: TObject);
     procedure btnDeleteByIdClick(Sender: TObject);
@@ -29,6 +31,7 @@ type
     { Private declarations }
     Pedidos: TObjectList<TPedido>; //TManagerPointer<
     PedidoController: IController<TPedido>;
+    Query: TDataSet;
   public
     { Public declarations }
   end;
@@ -80,6 +83,8 @@ begin
     Pedido.Comp:= '[Codigo: 12, Julia]';
 
     PedidoController.Save(Pedido);
+
+    Query:= PedidoController.Bind;
 
   finally
     FreeAndNil( Pedido );
@@ -186,6 +191,8 @@ begin
 
     PedidoController.Update(Pedido);
 
+    Query:= PedidoController.Bind;
+
   finally
     FreeAndNil(Pedido);
     FreeAndNil(Cliente);
@@ -195,16 +202,24 @@ end;
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   PedidoController:= TPedidoController<TPedido>.Create;
+
+  Query:= PedidoController.Bind;
+
+  dsPedidos.DataSet:= Query;
 end;
 
 procedure TfrmPrincipal.btnDeleteAllClick(Sender: TObject);
 begin
   PedidoController.DeleteAll;
+
+  Query:= PedidoController.Bind;
 end;
 
 procedure TfrmPrincipal.btnDeleteByIdClick(Sender: TObject);
 begin
   PedidoController.DeleteById(2);
+
+  Query:= PedidoController.Bind;
 end;
 
 end.

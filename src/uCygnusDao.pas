@@ -29,6 +29,7 @@ type
     function FindById(Id: Integer): T;
     function FindExists: Boolean;
     function FindAll: TObjectList<T>;
+    function Bind: TDataSet;
   end;
 
 const
@@ -51,6 +52,29 @@ uses
   uDataManagerFactory, uStatementFactory, uContainerSQL, System.JSON,
   uDataConverter;
 
+
+function TDao<T>.Bind: TDataSet;
+var
+  Entity: T;
+  Container: IContainerSQL<T>;
+  DataConverter: IDataConverter<T>;
+  CommadSQL: String;
+begin
+  Entity:= T.Create;
+  try
+    Container:= TContainerSQL<T>.Create;
+
+    CommadSQL:= Container.FindAll(Entity);
+
+    Statement.SQL(CommadSQL); //.OrderBy('DataEmissao');
+
+    DataConverter:= TDataConverter<T>.Create;
+
+    Result:= Statement.Open.Query;
+  finally
+    FreeAndNil(Entity);
+  end;
+end;
 
 constructor TDao<T>.Create(Manager: IDataManager);
 {var

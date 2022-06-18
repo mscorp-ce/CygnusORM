@@ -4,7 +4,7 @@ interface
 
 uses
   uAbstraction, uModel.Entities.Pedido, System.Generics.Collections,
-  uModel.Business.PedidoBusiness;
+  uModel.Business.PedidoBusiness, Data.DB;
 
 type
   TPedidoService<T: class> = class(TInterfacedObject, IService<TPedido>)
@@ -21,6 +21,7 @@ type
     function DeleteAll: Boolean;
     function FindById(Id: Integer): TPedido;
     function FindAll: TObjectList<TPedido>;
+    function Bind: TDataSet;
   end;
 
 implementation
@@ -29,6 +30,11 @@ uses
   uCygnusDao, System.SysUtils, uModel.Dao.PedidoDao, uDataManager;
 
 { PedidoService<T> }
+
+function TPedidoService<T>.Bind: TDataSet;
+begin
+  Result:= Dao.Bind;
+end;
 
 constructor TPedidoService<T>.Create;
 begin

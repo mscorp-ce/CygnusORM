@@ -3,7 +3,7 @@ unit uController.PedidoController;
 interface
 
 uses
-  System.Generics.Collections, uAbstraction, uModel.Entities.Pedido;
+  System.Generics.Collections, uAbstraction, uModel.Entities.Pedido, Data.DB;
 
 type
   TPedidoController<T: class, constructor> = class(TInterfacedObject, IController<TPedido>)
@@ -19,6 +19,7 @@ type
     function DeleteAll: Boolean;
     function FindById(Id: Integer): TPedido;
     function FindAll: TObjectList<TPedido>;
+    function Bind: TDataSet;
   end;
 
 implementation
@@ -27,6 +28,11 @@ uses
   System.SysUtils, uModel.Service.PedidoService;
 
 { TPedidoController<T> }
+
+function TPedidoController<T>.Bind: TDataSet;
+begin
+  Result:= PedidoService.Bind;
+end;
 
 constructor TPedidoController<T>.Create;
 begin

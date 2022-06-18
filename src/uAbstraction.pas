@@ -6,8 +6,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
   FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Phys.PGDef, FireDAC.Phys.PG,
-  Data.DB, FireDAC.Comp.Client, uAttributes, uMetaDates,
-  System.Generics.Collections, System.JSON;
+  FireDAC.Comp.Client, System.Generics.Collections, System.JSON, Data.DB,
+  uAttributes, uMetaDates;
 
 type
   IDataManager = interface
@@ -42,6 +42,7 @@ type
     function DeleteAll: Boolean;
     function FindById(Id: Integer): T;
     function FindAll: TObjectList<T>;
+    function Bind: TDataSet;
   end;
 
   IService<T: class> = interface
@@ -52,6 +53,7 @@ type
     function DeleteAll: Boolean;
     function FindById(Id: Integer): T;
     function FindAll: TObjectList<T>;
+    function Bind: TDataSet;
   end;
 
   IBusiness<T: class> = interface
@@ -69,6 +71,7 @@ type
     function FindById(Id: Integer): T;
     function FindExists: Boolean;
     function FindAll: TObjectList<T>;
+    function Bind: TDataSet;
   end;
 
   IContainerSQL<T: class> = interface
